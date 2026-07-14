@@ -31,30 +31,30 @@ g = x^2 + 2*x + 1;
 h = -1.*(1.*x-2)*(1.*x-4);
 
 % truncation degree for moments
-deg = 6;
+deg = 3;
 
 %% Step 2) Setup measure program variables
 
 % moments up to degree 'deg' as decision variables
-mu = casos.PS.sym('mu', monomials(x, 0:deg));
+mu = casos.PS.sym('mu', monomials(x, 0:deg), 'dual');
 
 %% Step 3) Setup the problem struct
 
 % Step 3.1: Define problem components
 
 % measure decision variables (moments)
-x_meas = mu;
+x_meas = mu.primalize;
 
 % constraints:
 % 1) mu is a probability measure: <g, mu> = 1
 % 2) support constraint: supp(mu) in K 
-g_lin = dot(mu, g) - 1;  % linear constraint
+g_lin = mu.evaluate(g) - 1;  % linear constraint
 
 % measure cone constraints are handled via opts.Kc.meas
-g_meas = mu.support(h);
+g_meas = primalize(mu.support(h));
 
 % cost function: <f, mu>
-f_cost = dot(f, mu);
+f_cost = mu.evaluate(f);
 
 % Step 3.2: Setup the struct
 sos = struct();

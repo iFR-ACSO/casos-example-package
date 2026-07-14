@@ -41,39 +41,40 @@ p = 0.5*1.*x(2)*(1.*x(2)^2+(1.*x(1)-0.5)^2)-(1.*x(2)^4+1.*x(2)^2*(1.*x(1)-0.5)^2
 g = (1-1.*x(1))*(1.*x(1)+1);
 
 % truncation degree for moments
-deg = 10;  
+deg = 5;  
 
 % get moments for a uniform distribution over [-1, 1]
-v = monomials(x(2), 0:deg);
+v = monomials(x(2), 0:2*deg);
 v = casos.PS(v.to_vector);
 mu_w = 0.5*int(v, x(2), [-1; 1])'*v;
 
 %% Step 2) Setup measure program variables
 
 % moments up to degree 'deg' as decision variables
-mu   = casos.PS.sym('mu', monomials(x,0:deg));
-mu_x = casos.PS.sym('mu_x', monomials(x(1),0:deg));
+mu   = casos.PS.sym('mu', monomials(x,0:deg), 'dual');
+mu_x = casos.PS.sym('mu_x', monomials(x(1),0:deg), 'dual');
 
 %% Step 3) Setup the problem struct
 
 % Step 3.1: Define problem components
 
 % measure decision variables (moments)
-x_meas = [mu; mu_x];
+x_meas = [mu.primalize; 
+          mu_x.primalize];
 
 % constraints:
 % 1) mu is a probability measure: <1, mu_x> = 1
 % 2) prod(mu_x,mu_w) >= mu
 % 3) support constraint: supp(mu_x) in {x | g(x) >= 0}
 % 4) support constraint: supp(mu) in { (x,w) | p(x,w) >= 0}
-g_lin = dot(mu_x, 1) - 1;  % linear constraint
+g_lin = mu_x.evaluate(1) - 1;  % linear constraint
 
-g_meas = [mu_x+mu_w-1-mu;
-          mu_x.support(g);
-          mu.support(p)];
+g_meas = [mu_x.primalize+mu_w-1-mu.primalize;
+          primalize(mu_x.support(g));
+          primalize(mu.support(p))];
 
 % cost function: -<mu,1>
-f_cost = -dot(mu, 1);
+f_cost = -mu.evaluate(1);
 
 % Step 3.2: Setup the struct
 sos = struct();

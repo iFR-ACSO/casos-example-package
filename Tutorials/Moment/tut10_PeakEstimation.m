@@ -59,10 +59,10 @@ p = x(2);
 T   = 5;    
 
 % truncation degree for moments for mu_occu
-deg = 10;    
+deg = 6;    
 
 % get degree for mu_init and mu_term
-degv = deg-f.maxdeg;
+degv = 2*deg-f.maxdeg;
 degv = degv + rem(degv,2);
 
 % support of the measures
@@ -73,20 +73,22 @@ supp_mu_occu  = t*(T-1.*t);
 %% Step 2) Setup measure program variables
 
 % initial measure variable 
-mu_init = casos.PS.sym('mu_init',monomials(x,0:degv));
+mu_init = casos.PS.sym('mu_init',monomials(x,0:degv/2), 'dual');
 
 % terminal measure variable 
-mu_term = casos.PS.sym('mu_term',monomials([t;x],0:degv));
+mu_term = casos.PS.sym('mu_term',monomials([t;x],0:degv/2), 'dual');
 
 % occupation measure variable 
-mu_occu = casos.PS.sym('mu_occu',monomials([t;x],0:deg));
+mu_occu = casos.PS.sym('mu_occu',monomials([t;x],0:deg), 'dual');
 
 %% Step 3) Setup the problem struct
 
 % Step 3.1: Define problem components
 
 % measure decision variables (moments)
-x_meas = [mu_init; mu_term; mu_occu];
+x_meas = [mu_init.primalize; 
+          mu_term.primalize; 
+          mu_occu.primalize];
 
 % constraints:
 % 1) Liouville equation
@@ -95,20 +97,20 @@ x_meas = [mu_init; mu_term; mu_occu];
 % 4) support constraint: supp(mu_term) in {(t,x) | supp_mu_term(t) >= 0}
 % 5) support constraint: supp(mu_occu) in {(t,x) | supp_mu_occu(t) >= 0}
 
-v = monomials([x;t], 0:(deg-f.maxdeg));
-liouville_eq = mu_term.project(v)-mu_init.project(v)-mu_occu.liouville(f,x,t);
+v = monomials([x;t], 0:(2*deg-f.maxdeg));
+liouville_eq = project(mu_term.primalize, v)-project(mu_init.primalize, v)-primalize(mu_occu.liouville(f,x,t));
 
 g_lin = [liouville_eq;
-         dot(mu_init, 1)-1
+         mu_init.evaluate(1)-1
          ];
 
-g_meas = [mu_init.support(supp_mu_init);    
-          mu_term.support(supp_mu_term);    
-          mu_occu.support(supp_mu_occu)
+g_meas = [primalize(mu_init.support(supp_mu_init));    
+          primalize(mu_term.support(supp_mu_term));    
+          primalize(mu_occu.support(supp_mu_occu))
           ];
 
 % cost function: <mu_term, p>
-f_cost = dot(mu_term, p);
+f_cost = mu_term.evaluate(p);
 
 % Step 3.2: Setup the struct
 sos = struct();
@@ -183,3 +185,20 @@ fprintf('The SDP has  %d decision variables\n',S.stats.conic.n_decVar)
 %% Step 7) Extracting the polynomial solution and display minimum value
 
 fprintf('Minimum value: %.12g\n', full(sol.f));
+
+%% Step 8) Plot random trajectories
+
+mpf = casos.toolboxes.to_multipoly(f);
+mpx = casos.toolboxes.to_multipoly(1.*x);
+mpg = casos.toolboxes.to_multipoly(supp_mu_init);
+Nsample = 1e2;
+xin = psample(-mpg, mpx, [1.5;0], Nsample);
+
+for i=1:Nsample
+    x0 = xin(:,i);
+    [xtraj,xconv] = psim(mpf,mpx,x0,T);
+    figure(1)
+    hold on
+    plot(xtraj{2}(:,1), xtraj{2}(:,2), 'k')
+end
+xlim([-0.5,2])

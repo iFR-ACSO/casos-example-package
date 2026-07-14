@@ -11,7 +11,7 @@
 %           minimize -<1, mu>
 %           subject to mu is a nonnegative measure on R
 %                      mu_g - mu is a nonnegative measure
-%                      supp(μ) in {x | g(x) >= 0}
+%                      supp(mu) in {x | g(x) >= 0}
 %   
 %           where: 
 %               - mu_g is the reference Gaussian measure (mean 0, variance sigma^2 = 0.2)
@@ -40,14 +40,14 @@ x = casos.Indeterminates('x');
 g = -1.*(1.*x+0.1)*(1.*x-0.1);
 
 % truncation degree for moments
-deg = 20;  
+deg = 10;  
 
 % get moments of the gaussian with mean = 0 and sigma^2 = 1
 sigma = sqrt(0.2);
-v = monomials(x, 0:deg);
+v = monomials(x, 0:2*deg);
 v = casos.PS(v.to_vector);
-moments_g = zeros(deg+1,1);
-for i = 0:deg
+moments_g = zeros(2*deg+1,1);
+for i = 0:2*deg
    if rem(i,2) == 0
         n = i-1;
         moments_g(i+1) = sigma^i*prod(n:-2:1);
@@ -60,25 +60,25 @@ mu_g = moments_g'*v;
 %% Step 2) Setup measure program variables
 
 % moments up to degree 'deg' as decision variables
-mu   = casos.PS.sym('mu', monomials(x,0:deg));
+mu   = casos.PS.sym('mu', monomials(x,0:deg), 'dual');
 
 %% Step 3) Setup the problem struct
 
 % Step 3.1: Define problem components
 
 % measure decision variables (moments)
-x_meas = mu;
+x_meas = mu.primalize;
 
 % constraints:
 % 1) mu_g - mu is a nonnegative measure
 % 2) support constraint: supp(mu) in {x | g(x) >= 0}
 g_lin = [];  % linear constraint
 
-g_meas = [mu_g - mu;
-          mu.support(g)];
+g_meas = [mu_g - mu.primalize;
+          primalize(mu.support(g))];
 
 % cost function: -<mu,1>
-f_cost = -dot(mu, 1);
+f_cost = -mu.evaluate(1);
 
 % Step 3.2: Setup the struct
 sos = struct();

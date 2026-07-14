@@ -27,12 +27,12 @@ f = x^4 + 10*x;
 u = 0.5 - x'*x;
 
 % truncation degree for moments
-deg = 6;
+deg = 3;
 
 %% Step 2) Setup measure program variables
 
 % moments up to degree 'deg' as decision variables
-mu = casos.PS.sym('mu', monomials(x, 0:deg));
+mu = casos.PS.sym('mu', monomials(x, 0:deg), 'dual');
 
 %% Step 3) Setup the problem struct
 
@@ -42,18 +42,18 @@ mu = casos.PS.sym('mu', monomials(x, 0:deg));
 x_lin = [];
 
 % measure decision variables (moments)
-x_meas = mu;
+x_meas = mu.primalize;
 
 % constraints:
 % 1) mu is a probability measure: <1, mu> = 1
 % 2) support constraint: supp(mu) in K  (implemented via mu.support(u))
-g_lin = dot(mu, 1) - 1;  % linear constraint: sum of moments at degree 0 = 1
+g_lin = mu.evaluate(1) - 1;  % linear constraint: sum of moments at degree 0 = 1
 
 % measure cone constraints are handled via opts.Kc.meas
-g_meas = [mu.support(u)];    % support constraint
+g_meas = [primalize(mu.support(u))];    % support constraint
 
 % cost function: <f, mu>
-f_cost = dot(f, mu);
+f_cost = mu.evaluate(f);
 
 % parameters (none)
 p = [];

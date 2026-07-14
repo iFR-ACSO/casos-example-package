@@ -29,34 +29,34 @@ x = casos.Indeterminates('x', 2, 1);
 g = x(1)*(x(1)^2 + x(2)^2)-(x(1)^4+x(1)^2*x(2)^2+x(2)^4);
 
 % truncation degree for moments
-deg = 10;
+deg = 5;
 
 % get lebesgue measure moments on [-1 1]^2 up to deg
-v = monomials(x, 0:deg);
+v = monomials(x, 0:2*deg);
 v = casos.PS(v.to_vector);
 lam = int(v, x, [-1 1; -1 1])'*v;
 
 %% Step 2) Setup measure program variables
 
 % moments up to degree 'deg' as decision variables
-mu = casos.PS.sym('mu', monomials(x, 0:deg));
+mu = casos.PS.sym('mu', monomials(x, 0:deg), 'dual');
 
 %% Step 3) Setup the problem struct
 
 % Step 3.1: Define problem components
 
 % measure decision variables (moments)
-x_meas = mu;
+x_meas = mu.primalize;
 
 % constraints:
 % 1) lam - mu is a nonnegative measure
 % 2) support constraint: supp(mu) in K 
 % measure cone constraints are handled via opts.Kc.meas
-g_meas = [lam-mu;
-          mu.support(g)];  
+g_meas = [lam-mu.primalize;
+          primalize(mu.support(g))];  
   
 % cost function: -<f, mu>
-f_cost = -dot(1, mu);
+f_cost = -mu.evaluate(1);
 
 % Step 3.2: Setup the struct
 sos = struct();
@@ -67,14 +67,10 @@ sos.g = g_meas;
 % decision variables: measure variables
 sos.x = x_meas;
 
-if ~isempty(f_cost)
-    sos.f = f_cost;
-else
-    % no cost, do not add to problem struct
-end
+% cost function to struct
+sos.f = f_cost;
 
 % Step 3.3: Provide the problem size i.e. size of cones
-
 nx_meas = length(x_meas);
 ng_meas = length(g_meas);
 

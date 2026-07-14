@@ -62,7 +62,7 @@ p = x(2);
 T = 5;
 
 % truncation degree for moments for mu_occu
-deg = 6;   
+deg = 5;   
 
 % support of the measures
 % 1) constraint on the uncertainty
@@ -74,19 +74,19 @@ gx0 = 0.4^2-1.*x(2)^2 -(1.*x(1)-1.5)^2;
      
 
 % get degree for mu_init and mu_term
-degv = deg-f.maxdeg;
+degv = 2*deg-f.maxdeg;
 degv = degv + rem(degv,2);
 
 %% Step 2) Setup measure program variables
 
 % occupation measure variable
-mu_occu = casos.PS.sym('mu_occu',monomials([t;w;x],0:deg));  
+mu_occu = casos.PS.sym('mu_occu',monomials([t;w;x],0:deg), 'dual');  
 
 % initial measure variable 
-mu_init = casos.PS.sym('mu_init',monomials([w;x],0:degv));      
+mu_init = casos.PS.sym('mu_init',monomials([w;x],0:degv/2), 'dual');      
 
 % terminal measure variable 
-mu_term = casos.PS.sym('mu_term',monomials([t;w;x],0:degv));   
+mu_term = casos.PS.sym('mu_term',monomials([t;w;x],0:degv/2), 'dual');   
 
 
 %% Step 3) Setup the problem struct
@@ -94,7 +94,9 @@ mu_term = casos.PS.sym('mu_term',monomials([t;w;x],0:degv));
 % Step 3.1: Define problem components
 
 % measure decision variables (moments)
-x_meas = [mu_init; mu_term; mu_occu];
+x_meas = [mu_init.primalize; 
+          mu_term.primalize; 
+          mu_occu.primalize];
 
 % constraints:
 % 1) Liouville equation
@@ -104,21 +106,21 @@ x_meas = [mu_init; mu_term; mu_occu];
 % 5) support constraint: supp(mu_occu) in {(t,x,w) | gt(t) >= 0}
 % 6) support constraint: supp(mu_occu) in {(t,x,w) | gw(w) >= 0}
 
-v = monomials([x;w;t], 0:(deg-f.maxdeg));
-liouville_eq = mu_term.project(v)-mu_init.project(v)-mu_occu.liouville(f,[x;w],t);
+v = monomials([x;w;t], 0:(2*deg-f.maxdeg));
+liouville_eq = project(mu_term.primalize, v)-project(mu_init.primalize, v)-primalize(mu_occu.liouville(f,[x;w],t));
 
 g_lin = [liouville_eq;
-         dot(mu_init,1)-1                           
+         mu_init.evaluate(1)-1                           
          ];  
 
-g_meas= [mu_init.support(gx0);   
-         mu_term.support(gt);    
-         mu_occu.support(gt);    
-         mu_occu.support(gw)     
+g_meas= [primalize(mu_init.support(gx0));   
+         primalize(mu_term.support(gt));    
+         primalize(mu_occu.support(gt));    
+         primalize(mu_occu.support(gw))     
          ];
 
 % cost function: <mu_term, p>
-f_cost = dot(mu_term, p);
+f_cost = mu_term.evaluate(p);
 
 % Step 3.2: Setup the struct
 sos = struct();
