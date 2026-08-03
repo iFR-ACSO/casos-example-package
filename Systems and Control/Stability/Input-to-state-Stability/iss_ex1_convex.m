@@ -37,17 +37,17 @@ V  = casos.PS.sym('v',monomials(x,1:4));
 
 % K_inf (see Example 1)
 a      = casos.PS.sym('ca',monomials(s^2));
-a_ubar = casos.PS.sym('cau',monomials(s^4));
+a_lbar = casos.PS.sym('cau',monomials(s^4));
 a_bar  = casos.PS.sym('cao',monomials([s^2 s^4]));
 sigma  = casos.PS.sym('si',monomials([s^2 s^4]));
 
 
 % constraints 
-[c_a_ubar,~]  = poly2basis(a_ubar);% helper to get "norm"
-c_a_ubar      = casos.PS(c_a_ubar);
+[c_a_lbar,~]  = poly2basis(a_lbar);% helper to get "norm"
+c_a_lbar      = casos.PS(c_a_lbar);
 
 % Eq.(19) from [1]
-g1 = V - c_a_ubar*(x'*x)^2;
+g1 = V - c_a_lbar*(x'*x)^2;
 
 
 [c_a_bar,~]  = poly2basis(a_bar);% helper to get "norm"
@@ -68,11 +68,11 @@ g3 =  + c_sigma(1)*(w'*w) + c_sigma(2)*(w'*w)^2 - nabla(V,x)*f - c_a*(x'*x) ;
 
 % Eq.(22) from  from [1]
 g4 = s*nabla(a_bar,s);
-g5 = s*nabla(a_ubar,s);
+g5 = s*nabla(a_lbar,s);
 g6 = s*nabla(sigma,s);
 g7 = s*nabla(a,s);
 
-sos = struct('x',[V;a_bar;a_ubar;a;sigma], ...
+sos = struct('x',[V;a_bar;a_lbar;a;sigma], ...
               'g',[g1;g2;g3;g4;g5;g6;g7]);
 
 % states + constraint are SOS cones

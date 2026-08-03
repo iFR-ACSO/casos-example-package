@@ -78,17 +78,17 @@ V = casos.PS.sym('v',monomials(x,2:4));
 
 % K_inf (see Example 1)
 a      = casos.PS.sym('ca',monomials([s^2 s^4]));
-a_ubar = casos.PS.sym('cau',monomials([s^2 s^4]));
+a_lbar = casos.PS.sym('cau',monomials([s^2 s^4]));
 a_bar  = casos.PS.sym('cao',monomials([s^2 s^4]));
 sigma  = casos.PS.sym('si',monomials([s^2 s^4]));
 
 
 % constraints
-[c_a_ubar,~]  = poly2basis(a_ubar); % helper to get "norm"
-c_a_ubar      = casos.PS(c_a_ubar);
+[c_a_lbar,~]  = poly2basis(a_lbar); % helper to get "norm"
+c_a_lbar      = casos.PS(c_a_lbar);
 
 % lower bound on ISS-Lyapunov
-g1 = V - c_a_ubar(1)*(x'*x) - c_a_ubar(2)*(x'*x)^2;
+g1 = V - c_a_lbar(1)*(x'*x) - c_a_lbar(2)*(x'*x)^2;
 
 [c_a_bar,~]  = poly2basis(a_bar);% helper to get "norm"
 c_a_bar      = casos.PS(c_a_bar);
@@ -109,7 +109,7 @@ g3 = c_sigma(1)*(w'*w) + c_sigma(2)*(w'*w)^2 - nabla(V,x)*f - c_a(1)*(x'*x) - c_
 
 % ensure univariate polynomials are Κ∞ functions 
 g4 = s*nabla(a_bar,s);
-g5 = s*nabla(a_ubar,s);
+g5 = s*nabla(a_lbar,s);
 g6 = s*nabla(sigma,s);
 g7 = s*nabla(a,s);
 
@@ -120,7 +120,7 @@ f = [];
 p = [];
 
 % polynomial decision variables
-x_lin   = [V; a_bar; a_ubar; a; sigma]; % linear decision variables
+x_lin   = [V; a_bar; a_lbar; a; sigma]; % linear decision variables
 x_sos   = [];                           % sos decision variables
 
 
