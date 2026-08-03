@@ -155,7 +155,6 @@ opts.Kx.lin = nx_lin;
 opts.Kc.lin = ng_lin;
 opts.Kc.sos = ng_sos;
 
-% options
 %opts.sossol_options.newton_solver = [];
 
 
