@@ -11,7 +11,7 @@
 %  Reference:
 %  [1]	H. Ichihara, „Sum of Squares Based Input-to-State Stability Analysis
 %       of Polynomial Nonlinear Systems", SICE Journal of Control, Measurement,
-%       and System Integration, Bd. 5, Nr. 4, S. 218–225, Juli 2012,
+%       and System Integration, Bd. 5, Nr. 4, S. 218–225, July 2012,
 %       doi: 10.9746/jcmsi.5.218.
 %
 %   License: see License file of repository
