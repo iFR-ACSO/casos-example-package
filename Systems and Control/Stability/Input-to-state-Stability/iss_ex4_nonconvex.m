@@ -173,5 +173,6 @@ x0 = casos.PD([x'*x; ones(3,1)*(x'*x);1;1;1;1;x'*x]);
 
 sol = S('x0',x0);
 
-Vsol = remove_coeffs(subs(sol.x(1),x,Dx*x),1e-6);
+Vsol = remove_coeffs(subs(sol.x(1),x,Dx*x),1e-6)
+Ksol = remove_coeffs(subs(sol.x(2:4),x,Dx*x),1e-6)
 Ksol = remove_coeffs(subs(sol.x(2:4),x,Dx*x),1e-6);
