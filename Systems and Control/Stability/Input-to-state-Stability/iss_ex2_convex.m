@@ -11,7 +11,7 @@
 %  Reference:
 %  [1]	H. Ichihara, „Sum of Squares Based Input-to-State Stability Analysis
 %       of Polynomial Nonlinear Systems", SICE Journal of Control, Measurement,
-%       and System Integration, Bd. 5, Nr. 4, S. 218–225, Juli 2012,
+%       and System Integration, Bd. 5, Nr. 4, S. 218–225, July 2012,
 %       doi: 10.9746/jcmsi.5.218.
 %
 %   License: see License file of repository
@@ -28,7 +28,6 @@ u = casos.PS('u',3);
 w = casos.PS('w',3);
 s = casos.PS('s',1);
 
-% Dynamics
 
 
 %% satellite dynamics (simple)
@@ -135,7 +134,6 @@ if ~isempty(f)
         'f', f,...
         'p',p,...
         'g',[g_lin;g_sos]);
-
 else
     sos = struct('x',[x_lin;x_sos], ...
         'p',p,...

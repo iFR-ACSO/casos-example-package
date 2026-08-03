@@ -10,7 +10,7 @@
 %  Reference:
 %  [1]	H. Ichihara, „Sum of Squares Based Input-to-State Stability Analysis
 %       of Polynomial Nonlinear Systems", SICE Journal of Control, Measurement,
-%       and System Integration, Bd. 5, Nr. 4, S. 218–225, Juli 2012,
+%       and System Integration, Bd. 5, Nr. 4, S. 218–225, July 2012,
 %       doi: 10.9746/jcmsi.5.218.
 %
 %   License: see License file of repository
@@ -163,5 +163,6 @@ x0 = casos.PD([x'*x; ones(3,1)*(x'*x);1;1;1;1]);
 
 sol = S('x0',x0);
 
-Vsol = remove_coeffs(subs(sol.x(1),x,Dx*x),1e-6);
+Vsol = remove_coeffs(subs(sol.x(1),x,Dx*x),1e-6)
+Ksol = remove_coeffs(subs(sol.x(2:4),x,Dx*x),1e-6)
 Ksol = remove_coeffs(subs(sol.x(2:4),x,Dx*x),1e-6);
