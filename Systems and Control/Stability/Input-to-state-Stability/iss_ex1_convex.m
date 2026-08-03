@@ -29,7 +29,7 @@ s = casos.Indeterminates('s',1);
 % Dynamics Example 1
 f = [-x(1)   + x(1)^2*x(2);
      -x(1)^3 - x(2) + w;
-     -x(3)   - x(1)^2/2];
+     -x(3)   + x(1)^2/2];
 
 
 % Lyapunov function candidate
