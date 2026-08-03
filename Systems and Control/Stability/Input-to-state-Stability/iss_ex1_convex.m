@@ -63,7 +63,6 @@ c_sigma      = casos.PS(c_sigma);
 c_a          = casos.PS(c_a);      
 
 % Eq.(21) rewritten; see eq.(5) 
-% hold
 g3 =  + c_sigma(1)*(w'*w) + c_sigma(2)*(w'*w)^2 - nabla(V,x)*f - c_a*(x'*x) ;
 
 
