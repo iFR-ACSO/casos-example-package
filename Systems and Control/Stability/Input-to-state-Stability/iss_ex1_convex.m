@@ -76,7 +76,7 @@ sos = struct('x',[V;a_bar;a_lbar;a;sigma], ...
               'g',[g1;g2;g3;g4;g5;g6;g7]);
 
 % states + constraint are SOS cones
-opts.Kx = struct('lin',5);
+opts.Kx = struct('lin', 5);
 opts.Kc = struct('sos', 7);
 
 % options
