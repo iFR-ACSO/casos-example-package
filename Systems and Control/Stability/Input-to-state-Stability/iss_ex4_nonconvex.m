@@ -28,7 +28,6 @@ u = casos.PS('u',3);
 w = casos.PS('w',3);
 s = casos.PS('s',1);
 
-% Dynamics
 
 
 %% satellite dynamics (simple)
