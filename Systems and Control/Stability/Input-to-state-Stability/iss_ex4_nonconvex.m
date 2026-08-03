@@ -103,8 +103,8 @@ h = x(4:7)'*x(4:7)-1;
 sh = casos.PS.sym('sh', monomials(x, 0:2)); % equality constraint 
 
 % ISS-CLF dissipation inequality: −∇𝑉(𝑥)𝑓(𝑥,𝑤) + 𝜎(‖𝑤‖) − 𝛼(‖𝑥‖) + s*h  is SOS
-g3 = c_sigma(1)*(w'*w) + c_sigma(2)*(w'*w)^2 - nabla(V,x)*f - c_a(1)*(x'*x) - c_a(2)*(x'*x)^2 + sh*h ;
 % We want to ensure quaternion keeps unit norm
+g3 = c_sigma(1)*(w'*w) + c_sigma(2)*(w'*w)^2 - nabla(V,x)*f - c_a(1)*(x'*x) - c_a(2)*(x'*x)^2 + sh*h ;
 
 
 % ensure univariate polynomials are Κ∞ functions 
