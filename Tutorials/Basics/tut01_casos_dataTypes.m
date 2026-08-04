@@ -1,6 +1,6 @@
 %% -----------------------------------------------------------------------
 %
-% Short description: This tutorial describes the different CaSoS data
+% Short description: This tutorial describes the different CaΣoS data
 %                    types, how to setup them up and how to mainpulate
 %                    them.
 %
