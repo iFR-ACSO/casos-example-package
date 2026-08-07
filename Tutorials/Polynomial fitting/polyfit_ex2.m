@@ -45,7 +45,9 @@ p = casos.PS.sym('p',monomials(x,0:8));
 s1 = casos.PS.sym('s1',monomials(x,0:3), 'gram');
 
 theta = casos.PS(length(pts),1);
-for i=1:length(pts); theta(i) = subs(p,x,pts(i))-y_w(i); end
+for i=1:length(pts)
+    theta(i) = subs(p,x,pts(i))-y_w(i); 
+end
 
 % define sos problem
 sos.x = [p; s1];
@@ -90,4 +92,5 @@ scatter(pts, y_w,'r.', 'DisplayName', 'Samples');
 plot(t, real_fcn(t), 'DisplayName', 'True function');
 % Plot the polynomial approximation obtained
 plot(t, full(p_plot(t)), 'DisplayName', 'Approximation without shape constraints');
+legend
 grid on
