@@ -1,9 +1,8 @@
 %% -----------------------------------------------------------------------
 %
-% Short description: This tutorial describes how to use CaSoS to setup a
+% Short description: This tutorial describes how to use CaΣoS to setup a
 %                    simple nonlinear dynamical system, compute a linear 
 %                    control law and setup a (simple) simulation.
-%
 %
 %   License: see License file of repository
 %

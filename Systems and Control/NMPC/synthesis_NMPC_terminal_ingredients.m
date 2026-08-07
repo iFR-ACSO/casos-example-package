@@ -1,26 +1,23 @@
 %% ------------------------------------------------------------------------
 %   
-%   Short Description: Script to find a suitable terminal set and penalty
-%                      for the full horizon NMPC. SOS programming is used to
-%                      find the largest possible (based on bisection) 
-%                      stable level set for the terminal set. The nonlinear
-%                      system is linearized and a Lyapunov
-%                      function for the linear system is found by solving 
-%                      the Riccati equation, i.e., by computing an LQR 
-%                      controller. Additionally, state and control 
-%                      constraints are considered. The script was used in
-%                      [1]. The same example can be also found in [2]. 
+%  Short Description: Script to find a suitable terminal set and penalty
+%                     for the full horizon NMPC. SOS programming is used to
+%                     find the largest possible (based on bisection) stable 
+%                     level set for the terminal set. The nonlinear system 
+%                     is linearized and a Lyapunov function for the linear 
+%                     system is found by solving the Riccati equation, i.e., 
+%                     by computing an LQR controller. Additionally, state 
+%                     and control constraints are considered. The script was 
+%                     used in [1]. The same example can be also found in [2]. 
 %
+%  Date:            15.12.2025
 %
-%   Date:            15.12.2025
-%
-%   References:
+%  References:
 %     [1] Jan Olucak, Arthur Castello B. de Oliveira, and Torbjørn Cunis 
-%        "Safe-by-Design: Approximate Nonlinear Model  Predictive Control
-%        with Realtime Feasibility" submitted to IEEE Transaction on
-%        Automatic Control, 2025, Pre-print: https://arxiv.org/abs/2509.22422
+%         "Safe-by-Design: Approximate Nonlinear Model  Predictive Control
+%         with Realtime Feasibility" submitted to IEEE Transaction on
+%         Automatic Control, 2025, Pre-print: https://arxiv.org/abs/2509.22422
 %     [2] https://github.com/iFR-ACSO/TAC25-Inf-MPC
-%    
 %
 %   License: see License file of repository
 %

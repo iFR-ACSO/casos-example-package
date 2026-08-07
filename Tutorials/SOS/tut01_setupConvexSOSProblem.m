@@ -1,10 +1,10 @@
 %% -----------------------------------------------------------------------
 %
-% Short description: This tutorial describes how to setup a simple convex
-%                    optimization problem. In a simple step by step
-%                    tutorial we guide you through the process of setting
-%                    up a problem in CaSOS, solve the problem and evaluate
-%                    the solution statistcs.
+%  Short description: This tutorial describes how to setup a simple convex
+%                     optimization problem. In a simple step by step
+%                     tutorial we guide you through the process of setting
+%                     up a problem in CaΣoS, solve the problem and evaluate
+%                     the solution statistcs.
 %
 %
 %  Problem: For a given Lypunov function, we want to check if 
@@ -20,7 +20,7 @@
 %           s is the only sought SOS decision varible. 
 %           No cost is assigned and no parameter are needed.
 %
-%   License: see License file of repository
+%  License: see License file of repository
 %
 % -----------------------------------------------------------------------
 

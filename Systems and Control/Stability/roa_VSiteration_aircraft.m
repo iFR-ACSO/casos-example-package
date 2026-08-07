@@ -1,20 +1,18 @@
 %--------------------------------------------------------------------------
 % 
-% Short Description:    Implementation of custom V-s-iteration for the GTM 
-%                       4D ROA problem in  CaSoS. The quasi-convex solver 
-%                       is used to perform the bisections. The problem at
-%                       hand and the polynomial dynamics are taken from
-%                       [1].
+%  Short Description: Implementation of custom V-s-iteration for the GTM 
+%                     4D ROA problem in  CaΣoS. The quasi-convex solver 
+%                     is used to perform the bisections. The problem at
+%                     hand and the polynomial dynamics are taken from [1].
 %
 %  Date:    15.12.2025
 %
-%
 %  Reference:  
-%   [1] A. Chakraborty, P. Seiler, and G. J. Balas, "Nonlinear region of 
-%       attraction analysis for flight control verification and validation,
-%       "Control Engineering Practice, vol. 19, no. 4, pp. 335–345, 2011
+%     [1] A. Chakraborty, P. Seiler, and G. J. Balas, "Nonlinear region of 
+%         attraction analysis for flight control verification and validation,
+%         "Control Engineering Practice, vol. 19, no. 4, pp. 335–345, 2011
 %
-%   License: see License file of repository
+%  License: see License file of repository
 %
 %--------------------------------------------------------------------------
 
