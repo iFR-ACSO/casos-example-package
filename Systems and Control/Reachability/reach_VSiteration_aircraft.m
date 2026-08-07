@@ -1,18 +1,18 @@
 %--------------------------------------------------------------------------
 % 
-% Short Description:    Implementation of custom V-s-iteration for the GTM 
-%                       4D reachability problem in CaSoS. The quasi-convex 
-%                       solver is used to perform the bisection. 
-%                       The problem at hand and the polynomial dynamics are 
-%                       taken from [1] and [2].
+%  Short Description: Implementation of custom V-s-iteration for the GTM 
+%                     4D reachability problem in CaΣoS. The quasi-convex 
+%                     solver is used to perform the bisection. 
+%                     The problem at hand and the polynomial dynamics are 
+%                     taken from [1] and [2].
 % 
-% Date:                 15.12.2025
+%  Date:              15.12.2025
 %
 % References 
-% [1]   H. Yin, P. Seiler, and M. Arcak, "Backward Reachability Using 
-%       Integral Quadratic Constraints for Uncertain Nonlinear Systems," 
-%       IEEE Control Systems Letters, vol. 5, no. 2, pp. 707–712, 2021
-% [2]   https://github.com/heyinUCB/Backward-Reachability-Analysis-and-Control-Synthesis
+%    [1] H. Yin, P. Seiler, and M. Arcak, "Backward Reachability Using 
+%        Integral Quadratic Constraints for Uncertain Nonlinear Systems," 
+%        IEEE Control Systems Letters, vol. 5, no. 2, pp. 707–712, 2021
+%    [2] https://github.com/heyinUCB/Backward-Reachability-Analysis-and-Control-Synthesis
 %
 %   License: see License file of repository
 %
