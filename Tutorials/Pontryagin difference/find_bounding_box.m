@@ -1,7 +1,6 @@
 function box = find_bounding_box(a, varargin)
-% Description: Find axis-aligned bounding box of polynomial a(x) returning 
-%              the bounding box [x1_min, x1_max, x2_min, x2_max, ...] for 
-%              the polynomial a(x).
+% Find axis-aligned bounding box of polynomial a(x) returning the bounding 
+% box [x1_min, x1_max, x2_min, x2_max, ...] for the polynomial a(x).
 
 % process input options
 if isempty(varargin)
