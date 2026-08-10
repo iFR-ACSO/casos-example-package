@@ -1,12 +1,10 @@
-function box = find_bounding_box(a, varargin)
+function box = find_bounding_box(a, param)
 % Find axis-aligned bounding box of polynomial a(x) returning the bounding 
 % box [x1_min, x1_max, x2_min, x2_max, ...] for the polynomial a(x).
 
 % process input options
-if isempty(varargin)
+if (nargin < 2)
     param = struct();
-else
-    param = varargin{:};
 end
 
 if ~isfield(param,'deg_s'), param.deg_s = 1; end
