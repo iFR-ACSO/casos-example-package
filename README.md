@@ -16,6 +16,7 @@ The example package itself does not not need to be installed. Only a [stable ver
 ```text
 Tutorials/						# Folder contains different tutorials
 ├── Basics        				# Toolbox basics
+├── Pontryagin difference		# Examples for estimating inner approximations of the Pontryagin difference
 ├── SOS			  				# How to setup different types of SOS problems
 └── Conic			  			# How to setup conic problems using sdpsol interface
 
