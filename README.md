@@ -16,7 +16,9 @@ The example package itself does not not need to be installed. Only a [stable ver
 ```text
 Tutorials/						# Folder contains different tutorials
 ├── Basics        				# Toolbox basics
+├── Pontryagin difference		# Examples for estimating inner approximations of the Pontryagin difference
 ├── SOS			  				# How to setup different types of SOS problems
+├── Polynomial fitting			# How to set up a polynomial fitting with shape constraints
 └── Conic			  			# How to setup conic problems using sdpsol interface
 
 Systems and Control/ 			# Examples from the systems and controls literature

@@ -1,23 +1,21 @@
 %% ------------------------------------------------------------------------
 %   
-%   Short Description: Script to syntheszise the non-conflicting CBF/CLF for 
-%                      the for the infinetesimal-MPC approach presented in
-%                      [1]. The same example can be also found in [2]. 
-%
+%  Short Description: Script to syntheszise the non-conflicting CBF/CLF for 
+%                     the for the infinetesimal-MPC approach presented in
+%                     [1]. The same example can be also found in [2]. 
 %
 %  Date:            15.12.2025
 %
-% References:
+%  References:
 %     [1] Jan Olucak, Arthur Castello B. de Oliveira, and Torbjørn Cunis 
 %       "Safe-by-Design: Approximate Nonlinear Model  Predictive Control
 %        with Realtime Feasibility" submitted to IEEE Transaction on
 %        Automatic Control, 2025, Pre-print: https://arxiv.org/abs/2509.22422
 %     [2] https://github.com/iFR-ACSO/TAC25-Inf-MPC
 %    
+%  License: see License file of repository
 %
-%   License: see License file of repository
-%
-% ------------------------------------------------------------------------
+% -------------------------------------------------------------------------
 
 % system states
 x = casos.PS('x',6,1);

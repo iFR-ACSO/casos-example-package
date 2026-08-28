@@ -3,7 +3,7 @@
 % Short description: This tutorial describes how to setup a simple quasi-
 %                    convex optimization problem. In a simple step by step
 %                    tutorial we guide you through the process of setting
-%                    up a problem in CaSOS, solve the problem and evaluate
+%                    up a problem in CaΣoS, solve the problem and evaluate
 %                    the solution statistcs.
 %
 %
