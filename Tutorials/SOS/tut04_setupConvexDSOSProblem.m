@@ -2,15 +2,15 @@
 %
 % Short description: This tutorial describes how to setup a simple convex
 %                    optimization problem with DSOS decsision variable and 
-%                    DSOS constraint. In a simple step by step
-%                    tutorial we guide you through the process of setting
-%                    up a problem in CaSOS, solve the problem and evaluate
-%                    the solution statistcs.
+%                    DSOS constraint. In a simple step by step tutorial we 
+%                    guide you through the process of setting up a problem 
+%                    in CaΣoS, solve the problem and evaluate the solution 
+%                    statistcs.
 %
 %
 %  Problem: For a given Lypunov function, we want to check if 
 %           {x \in R^n | V(x) < 1} is a stable level set. 
-%            We define a convex SOS problem of the form:
+%           We define a convex SOS problem of the form:
 %
 %           s*(V-1) - \nabla V \cdot f(x) - epsilon(x) is DSOS 
 %

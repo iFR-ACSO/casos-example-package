@@ -4,7 +4,7 @@
 %                    optimization problem with DSOS decsision variable and 
 %                    DSOS constraint. In a simple step by step
 %                    tutorial we guide you through the process of setting
-%                    up a problem in CaSOS, solve the problem and evaluate
+%                    up a problem in CaΣoS, solve the problem and evaluate
 %                    the solution statistcs.
 %
 %
