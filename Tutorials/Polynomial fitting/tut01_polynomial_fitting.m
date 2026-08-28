@@ -1,8 +1,7 @@
 %% -----------------------------------------------------------------------
 %
 %  Short description: This tutorial describes how to setup a polynomial
-%                     fitting using CaΣoS,
-%
+%                     fitting using CaΣoS.
 %
 %  Problem: Given noisy data, we want to obtain a polynomial that minimizes
 %           the squared error against the noisy samples. In this problem,

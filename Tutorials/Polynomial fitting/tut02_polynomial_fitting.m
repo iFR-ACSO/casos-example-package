@@ -5,7 +5,6 @@
 %                     constraints on the fitting, in this case, nonnegativity
 %                     and monotonicity.
 %
-%
 %  Problem: Given noisy data, we want to obtain a polynomial that minimizes
 %           the squared error against the noisy samples. In this problem,
 %           pre-knowledge is used about the shape of the real function,
